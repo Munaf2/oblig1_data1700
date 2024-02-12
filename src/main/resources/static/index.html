@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kinobilletter</title>
+  <script src="index.js"></script>
+</head>
+<body>
+<h1>Bestilling av kinobilletter</h1>
+<p>Velg film:
+  <select id="valg" onchange="filmValg();">
+    <option></option>;
+    <option>Barbie</option>;
+    <option>Rush hour</option>;
+    <option>Wonka</option>;
+  </select>
+  <span id="feilValg" style="color: red"></span>
+</p>
+
+
+<p> Antall
+  <input type="text" id="antall" size="2" required>
+  <span id="feilAntall" style="color: red"></span>
+</p>
+
+<table>
+  <tr>
+    <td>Fornavn</td>
+    <td><input type="text" id="fornavn" required></td>
+    <span id="feilFornavn" style="color: red"></span>
+  </tr>
+  <tr>
+    <td>Etternavn</td>
+    <td><input type="text" id="etternavn" required></td>
+    <span id="feilEtternavn" style="color: red"></span>
+  </tr>
+  <tr>
+    <td>Telefonnr</td>
+    <td><input type="text" id="telefonnr" required></td>
+    <span id="feilTelefonnr" style="color: red"></span>
+  </tr>
+  <tr>
+    <td>Epost</td>
+    <td><input type="text" id="epost" required></td>
+    <span id="feilEpost" style="color: red"></span>
+  </tr>
+</table>
+
+<button type="button" id="kjøpBilletten" onclick="kjøpBillett()">Kjøp billett</button>
+
+<h2>Alle billetter</h2>
+<div id="visAlle"></div>
+
+<button type="button" id="slettAlleB" onclick="slettBilett()">Slett alle billetter</button>
+
+</body>
+</html>
