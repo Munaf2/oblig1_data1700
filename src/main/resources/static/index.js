@@ -62,19 +62,19 @@ function kjøpBillett(){
         document.getElementById("etternavn").value="";
         document.getElementById("telefonnr").value="";
         document.getElementById("epost").value="";
-
-        function visBilletter(){
-            let ut = "<table><tr>"+
-                "<th>Film</th>+<th>Antall</th>+<th>Fornavn</th>+<th>Etternavn</th>+<th>Telefonnr</th>+<th>Epost</th>"+
-                "</tr>";
-            for (let b of billetter){
-                ut+="<tr>";
-                ut+="<td>"+b.valg+"</td>"+"<td>"+b.antall+"</td>"+"<td>"+b.fornavn+"</td>"+"<td>"+b.etternavn+"</td>"+"<td>"+b.telefonnr+"</td>"+"<td>"+b.epost+"</td>";
-                ut+="</tr>";
-            }
-            document.getElementById("visAlle").innerHTML=ut;
-        }
     }
+}
+
+function visBilletter(){
+    let ut = "<table><tr>"+
+        "<th>Film</th>+<th>Antall</th>+<th>Fornavn</th>+<th>Etternavn</th>+<th>Telefonnr</th>+<th>Epost</th>"+
+        "</tr>";
+    for (let b of billetter){
+        ut+="<tr>";
+        ut+="<td>"+b.valg+"</td>"+"<td>"+b.antall+"</td>"+"<td>"+b.fornavn+"</td>"+"<td>"+b.etternavn+"</td>"+"<td>"+b.telefonnr+"</td>"+"<td>"+b.epost+"</td>";
+        ut+="</tr>";
+    }
+    document.getElementById("visAlle").innerHTML=ut;
 }
 
 // sletter billettene etter at de er printet ut
