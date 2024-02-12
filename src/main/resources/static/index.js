@@ -13,11 +13,13 @@ function kjøpBillett(){
 
     let feilmelding = false;
 
+    // validering for inputfelt, dersom feltene er tomme skrives det ut feilmelding
     if (document.getElementById("valg").value === ""){
         document.getElementById("feilValg").innerHTML = "Velg en film!";
         feilmelding = true;
     }
 
+    //validering for antall, dersom noe annet enn tall skrives kommer det opp feilmelding
     if (document.getElementById("antall").value === "" || isNaN(antall)){
         document.getElementById("feilAntall").innerHTML = "Skriv inn riktig antall!";
         feilmelding = true;
@@ -33,6 +35,7 @@ function kjøpBillett(){
         feilmelding = true;
     }
 
+    //validering for telefonnr, dersom noe annet enn tall skrives kommer det opp feilmelding
     if (document.getElementById("telefonnr").value === "" || isNaN(telefonnr)){
         document.getElementById("feilTelefonnr").innerHTML = "Skriv inn tlf";
         feilmelding = true;
@@ -43,6 +46,7 @@ function kjøpBillett(){
         feilmelding = true;
     }
 
+    // når alt er skrevet inn riktig i inputfeltene, skal billettene skrives ut
     if (!feilmelding){
 
         let enBillett = {
@@ -56,6 +60,7 @@ function kjøpBillett(){
         billetter.push(enBillett);
         visBilletter();
 
+        //tømmer input felt etter at billettene er printet ut
         document.getElementById("valg").value="";
         document.getElementById("antall").value="";
         document.getElementById("fornavn").value="";
@@ -65,10 +70,9 @@ function kjøpBillett(){
     }
 }
 
+// formatering for å vise billettene med tabell 
 function visBilletter(){
-    let ut = "<table><tr>"+
-        "<th>Film</th>+<th>Antall</th>+<th>Fornavn</th>+<th>Etternavn</th>+<th>Telefonnr</th>+<th>Epost</th>"+
-        "</tr>";
+    let ut = `<table><tr><th>Film</th><th>Antall</th><th>Fornavn</th><th>Etternavn</th><th>Telefonnr</th><th>Epost</th></tr>`;
     for (let b of billetter){
         ut+="<tr>";
         ut+="<td>"+b.valg+"</td>"+"<td>"+b.antall+"</td>"+"<td>"+b.fornavn+"</td>"+"<td>"+b.etternavn+"</td>"+"<td>"+b.telefonnr+"</td>"+"<td>"+b.epost+"</td>";
