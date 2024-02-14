@@ -15,13 +15,14 @@ function kjøpBillett(){
 
     // validering for inputfelt, dersom feltene er tomme skrives det ut feilmelding
     if (document.getElementById("valg").value === ""){
-        document.getElementById("feilValg").innerHTML = "Velg en film!";
+        document.getElementById("feilValg").innerHTML = "Velg en film";
         feilmelding = true;
     }
 
     //validering for antall, dersom noe annet enn tall skrives kommer det opp feilmelding
-    if (document.getElementById("antall").value === "" || isNaN(antall)){
-        document.getElementById("feilAntall").innerHTML = "Skriv inn riktig antall!";
+    let antallBilletter = document.getElementById("antall").value;
+    if (antallBilletter === "" || isNaN(antall) || antallBilletter <= 0) {
+        document.getElementById("feilAntall").innerHTML = "Skriv inn riktig antall";
         feilmelding = true;
     }
 
@@ -31,18 +32,20 @@ function kjøpBillett(){
     }
 
     if (document.getElementById("etternavn").value === ""){
-        document.getElementById("feilEtternavn").innerHTML = "Skriv inn etternavn";
+        document.getElementById("feilEtternavn").innerHTML = "Skriv inn etternavn <br>";
         feilmelding = true;
     }
 
-    //validering for telefonnr, dersom noe annet enn tall skrives kommer det opp feilmelding
-    if (document.getElementById("telefonnr").value === "" || isNaN(telefonnr)){
-        document.getElementById("feilTelefonnr").innerHTML = "Skriv inn tlf";
+    // telefonnummer på 8 siffer
+    let telefonnrPattern = /^\d{8}$/;
+    if (telefonnr === "" || !telefonnrPattern.test(telefonnr)){
+        document.getElementById("feilTelefonnr").innerHTML = "Skriv inn gyldig telefonnr: xxxxxxxx";
         feilmelding = true;
     }
 
-    if (document.getElementById("epost").value === ""){
-        document.getElementById("feilEpost").innerHTML = "Skriv inn epost";
+    let epostPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (epost === "" || !epostPattern.test(epost)){
+        document.getElementById("feilEpost").innerHTML = "Skriv inn gyldig epost";
         feilmelding = true;
     }
 
@@ -60,17 +63,25 @@ function kjøpBillett(){
         billetter.push(enBillett);
         visBilletter();
 
-        //tømmer input felt etter at billettene er printet ut
+        //tømmer alle input felt etter billettkjøp
         document.getElementById("valg").value="";
         document.getElementById("antall").value="";
         document.getElementById("fornavn").value="";
         document.getElementById("etternavn").value="";
         document.getElementById("telefonnr").value="";
         document.getElementById("epost").value="";
+
+        //tømmer alle error messages etter billettkjøp
+        document.getElementById("feilValg").innerHTML = "";
+        document.getElementById("feilAntall").innerHTML = "";
+        document.getElementById("feilFornavn").innerHTML = "";
+        document.getElementById("feilEtternavn").innerHTML = "";
+        document.getElementById("feilTelefonnr").innerHTML = "";
+        document.getElementById("feilEpost").innerHTML = "";
     }
 }
 
-// formatering for å vise billettene med tabell 
+// formatering for å vise billettene med tabell
 function visBilletter(){
     let ut = `<table><tr><th>Film</th><th>Antall</th><th>Fornavn</th><th>Etternavn</th><th>Telefonnr</th><th>Epost</th></tr>`;
     for (let b of billetter){

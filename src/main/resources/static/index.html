@@ -8,15 +8,16 @@
 <body>
 <h1>Bestilling av kinobilletter</h1>
 <p>Velg film:
-  <select id="valg" onchange="filmValg();">
+  <select id="valg">
     <option></option>;
     <option>Barbie</option>;
     <option>Rush hour</option>;
     <option>Wonka</option>;
+    <option>Bukkene bruse</option>;
+    <option>Titanic</option>;
   </select>
-  <span id="feilValg" style="color: red"></span>
+  <span id="feilValg" style="color: red"></span> <br>
 </p>
-
 
 <p> Antall
   <input type="text" id="antall" size="2" required>
@@ -26,23 +27,34 @@
 <table>
   <tr>
     <td>Fornavn</td>
-    <td><input type="text" id="fornavn" required></td>
-    <span id="feilFornavn" style="color: red"></span>
+    <td>
+      <input type="text" id="fornavn" required>
+      <span id="feilFornavn" style="color: red"></span>
+    </td>
   </tr>
+
   <tr>
     <td>Etternavn</td>
-    <td><input type="text" id="etternavn" required></td>
-    <span id="feilEtternavn" style="color: red"></span>
+    <td>
+      <input type="text" id="etternavn" required>
+      <span id="feilEtternavn" style="color: red"></span>
+    </td>
   </tr>
+
   <tr>
     <td>Telefonnr</td>
-    <td><input type="text" id="telefonnr" required></td>
-    <span id="feilTelefonnr" style="color: red"></span>
+    <td>
+      <input type="text" id="telefonnr" required>
+      <span id="feilTelefonnr" style="color: red"></span>
+    </td>
   </tr>
+
   <tr>
     <td>Epost</td>
-    <td><input type="text" id="epost" required></td>
-    <span id="feilEpost" style="color: red"></span>
+    <td>
+      <input type="text" id="epost" required>
+      <span id="feilEpost" style="color: red"></span>
+    </td>
   </tr>
 </table>
 
