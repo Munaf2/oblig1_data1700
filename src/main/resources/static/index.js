@@ -1,8 +1,8 @@
-<!-- Array for å vise billetter  -->
 
-<!-- Gir verdiene fra inputfeltene -->
-
+//Array for å vise billetter
 let billetter=[];
+
+//Gir verdiene fra inputfeltene
 function kjøpBillett(){
     let film = document.getElementById("valg").value;
     let antall = document.getElementById("antall").value;
