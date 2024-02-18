@@ -43,6 +43,7 @@ function kjøpBillett(){
         feilmelding = true;
     }
 
+    //Kilde til regex: https://regexr.com/?fbclid=IwAR2bGyQfo45_TVhlQ_3gdQi_UUIlhBpNXEoHbqWsxL2cSeagVYn7W3ZFrCo
     let epostPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (epost === "" || !epostPattern.test(epost)){
         document.getElementById("feilEpost").innerHTML = "Skriv inn gyldig epost";
