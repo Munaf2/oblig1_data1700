@@ -1,4 +1,4 @@
-$(function (){
+/*$(function (){
     hentAlleFilmer();
 });
 
@@ -17,7 +17,7 @@ function formaterFilmer(filmer){
     }
     ut+= "</select>";
     $("valg").html(ut);
-}
+}*/
 
 
 //Array for å vise billetter
@@ -36,7 +36,7 @@ function kjøpBillett(){
     let feilmelding = false;
 
     // validering for inputfelt, dersom feltene er tomme skrives det ut feilmelding
-    if (document.getElementById("valg").value === ""){
+    if (document.getElementById("valgtFilm").value === ""){
         document.getElementById("feilValg").innerHTML = "Velg en film";
         feilmelding = true;
     }
