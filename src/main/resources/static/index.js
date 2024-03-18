@@ -1,4 +1,4 @@
-/*$(function (){
+$(function (){
     hentAlleFilmer();
 });
 
@@ -17,7 +17,7 @@ function formaterFilmer(filmer){
     }
     ut+= "</select>";
     $("valg").html(ut);
-}*/
+}
 
 
 //Array for å vise billetter
@@ -93,7 +93,7 @@ function kjøpBillett(){
 
 
         //tømmer alle input felt etter billettkjøp
-        document.getElementById("valg").value="";
+        document.getElementById("valgtFilm").value="";
         document.getElementById("antall").value="";
         document.getElementById("fornavn").value="";
         document.getElementById("etternavn").value="";
