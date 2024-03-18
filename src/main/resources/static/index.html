@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <head>
   <meta charset="UTF-8">
   <title>Bestilling av kinobilletter </title>
@@ -7,63 +9,61 @@
 </head>
 <body>
 <h1>Bestilling av kinobilletter</h1>
-<p>Velg film:
-  <select id="valg">
-    <option></option>;
-    <option>Barbie</option>;
-    <option>Rush hour</option>;
-    <option>Wonka</option>;
-    <option>Bukkene bruse</option>;
-    <option>Titanic</option>;
-  </select>
-  <span id="feilValg" style="color: red"></span> <br>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+       <form class="form">
 
-<p> Antall
-  <input type="text" id="antall" size="2" required>
-  <span id="feilAntall" style="color: red"></span>
-</p>
+         <div class="form-group">
+           <label for="valg">Velg film:</label>
+             <div id="valg" class="dropdown"></div>
+             <span id="feilValg" style="color: red"></span>
+         </div>
 
-<table>
-  <tr>
-    <td>Fornavn</td>
-    <td>
-      <input type="text" id="fornavn" required>
-      <span id="feilFornavn" style="color: red"></span>
-    </td>
-  </tr>
+         <div class="form-group">
+          <label for="antall">Antall:</label>
+          <input type="text" id="antall" size="2" class="form-control"required>
+           <span id="feilAntall" style="color: red"></span>
+         </div>
 
-  <tr>
-    <td>Etternavn</td>
-    <td>
-      <input type="text" id="etternavn" required>
-      <span id="feilEtternavn" style="color: red"></span>
-    </td>
-  </tr>
+         <div class="form-group">
+           <label for="fornavn">Fornavn:</label>
+           <input type="text" id="fornavn" class="form-control" required>
+           <span id="feilFornavn" style="color: red"></span>
+         </div>
 
-  <tr>
-    <td>Telefonnr</td>
-    <td>
-      <input type="text" id="telefonnr" required>
-      <span id="feilTelefonnr" style="color: red"></span>
-    </td>
-  </tr>
+         <div class="form-group">
+            <label for="etternavn">Etternavn:</label>
+            <input type="text" id="etternavn" class="form-control" required>
+            <span id="feilEtternavn" style="color: red"></span>
+         </div>
 
-  <tr>
-    <td>Epost</td>
-    <td>
-      <input type="text" id="epost" required>
-      <span id="feilEpost" style="color: red"></span>
-    </td>
-  </tr>
-</table>
+         <div class="form-group">
+            <label for="telefonnr">Telefonnr:</label>
+            <input type="text" id="telefonnr" class="form-control" required>
+            <span id="feilTelefonnr" style="color: red"></span>
+         </div>
 
-<button type="button" id="kjøpBilletten" onclick="kjøpBillett()">Kjøp billett</button>
+         <div class="form-group">
+         <label for="epost">Epost:</label>
+            <input type="text" id="epost" class="form-control" required>
+            <span id="feilEpost" style="color: red"></span>
+         </div>
+       </form>
 
-<h2>Alle billetter</h2>
-<div id="visAlle"></div>
+      <button class="btn btn-primary" id="kjøpBilletten" onclick="kjøpBillett()">Kjøp billett</button>
+    </div>
 
-<button type="button" id="slettAlleB" onclick="slettBilett()">Slett alle billetter</button>
-
+    <div class="col-md-8">
+          <h2>Alle billettene</h2>
+          <div id="visAlle" class="table-responsive"></div>
+          <button class="btn btn-danger" id="slettAlleB" onclick="slettBilett()">Slett alle billetter</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
+
+
+
+

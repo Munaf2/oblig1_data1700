@@ -1,15 +1,37 @@
+$(function (){
+    hentAlleFilmer();
+});
+
+//skal hente biler lagt inn i konstruktøren
+function hentAlleFilmer(){
+    $.get("/hentFilmer", function (filmer){
+        formaterFilmer(filmer);
+    });
+}
+
+function formaterFilmer(filmer){
+    let ut = "<select id=´valgtFilm´>";
+    ut+="<option>Velg film</option>"
+    for (const film of filmer){
+        ut+="<option>"+film.valg+"</option>"
+    }
+    ut+= "</select>";
+    $("valg").html(ut);
+}
+
 
 //Array for å vise billetter
 let billetter=[];
 
 //Gir verdiene fra inputfeltene
 function kjøpBillett(){
-    let film = document.getElementById("valg").value;
+    let film = document.getElementById("valgtFilm").value;
     let antall = document.getElementById("antall").value;
     let fornavn = document.getElementById("fornavn").value;
     let etternavn = document.getElementById("etternavn").value;
     let telefonnr = document.getElementById("telefonnr").value;
     let epost = document.getElementById("epost").value;
+
 
     let feilmelding = false;
 
@@ -64,6 +86,12 @@ function kjøpBillett(){
         billetter.push(enBillett);
         visBilletter();
 
+        console.log(enBillett)
+        $.post("/lagre", enBillett, function (){
+            hentAlle();
+        });
+
+
         //tømmer alle input felt etter billettkjøp
         document.getElementById("valg").value="";
         document.getElementById("antall").value="";
@@ -82,9 +110,15 @@ function kjøpBillett(){
     }
 }
 
+function hentAlle(){
+    $.get("/hentAlle", function (data){
+        visBilletter(data);
+    });
+}
+
 // formatering for å vise billettene med tabell
 function visBilletter(){
-    let ut = `<table><tr><th>Film</th><th>Antall</th><th>Fornavn</th><th>Etternavn</th><th>Telefonnr</th><th>Epost</th></tr>`;
+    let ut = `<table class="table table-striped"><tr><th>Film</th><th>Antall</th><th>Fornavn</th><th>Etternavn</th><th>Telefonnr</th><th>Epost</th></tr>`;
     for (let b of billetter){
         ut+="<tr>";
         ut+="<td>"+b.valg+"</td>"+"<td>"+b.antall+"</td>"+"<td>"+b.fornavn+"</td>"+"<td>"+b.etternavn+"</td>"+"<td>"+b.telefonnr+"</td>"+"<td>"+b.epost+"</td>";
@@ -97,4 +131,8 @@ function visBilletter(){
 function slettBilett(){
     billetter.length = 0;
     visBilletter();
+
+    $.get("/slettAlle", function (){
+        hentAlle();
+    });
 }
