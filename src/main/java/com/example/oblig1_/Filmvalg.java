@@ -1,17 +1,17 @@
 package com.example.oblig1_;
 
 public class Filmvalg {
-    private String valg;
+    private String film;
 
-    public Filmvalg(String valg) {
-        this.valg = valg;
+    public Filmvalg(String film) {
+        this.film = film;
     }
 
-    public String getValg() {
-        return valg;
+    public String getFilm() {
+        return film;
     }
 
-    public void setValg(String valg) {
-        this.valg = valg;
+    public void setFilm(String film) {
+        this.film = film;
     }
 }

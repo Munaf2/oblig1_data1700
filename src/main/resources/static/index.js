@@ -1,31 +1,33 @@
+
 $(function (){
     hentAlleFilmer();
 });
 
-//skal hente biler lagt inn i konstruktøren
 function hentAlleFilmer(){
-    $.get("/hentFilmer", function (filmer){
-        formaterFilmer(filmer);
+    $.get("/hentAlleFilmer", function (enFilm){
+        formaterFilmer(enFilm);
     });
 }
 
-function formaterFilmer(filmer){
-    let ut = "<select id=´valgtFilm´>";
-    ut+="<option>Velg film</option>"
-    for (const film of filmer){
-        ut+="<option>"+film.valg+"</option>"
+//dropdown for film
+function formaterFilmer(enFilm){
+    console.log(enFilm);
+    let ut = "<select id='valgtFilm'>";
+    ut += "<option>Velg film</option>";
+
+    for (const film of enFilm){
+        ut+="<option>"+film.film+"</option>";
     }
     ut+= "</select>";
-    $("valg").html(ut);
+    $("#film").html(ut);
 }
-
 
 //Array for å vise billetter
 let billetter=[];
 
 //Gir verdiene fra inputfeltene
 function kjøpBillett(){
-    let film = document.getElementById("valgtFilm").value;
+    let valgtFilm = document.getElementById("valgtFilm").value;
     let antall = document.getElementById("antall").value;
     let fornavn = document.getElementById("fornavn").value;
     let etternavn = document.getElementById("etternavn").value;
@@ -58,7 +60,7 @@ function kjøpBillett(){
         feilmelding = true;
     }
 
-    // telefonnummer på 8 siffer
+     // telefonnummer på 8 siffer
     let telefonnrPattern = /^\d{8}$/;
     if (telefonnr === "" || !telefonnrPattern.test(telefonnr)){
         document.getElementById("feilTelefonnr").innerHTML = "Skriv inn gyldig telefonnr: xxxxxxxx";
@@ -76,7 +78,7 @@ function kjøpBillett(){
     if (!feilmelding){
 
         let enBillett = {
-            valg : film,
+            film : valgtFilm,
             antall : antall,
             fornavn : fornavn,
             etternavn : etternavn,
@@ -89,6 +91,10 @@ function kjøpBillett(){
         console.log(enBillett)
         $.post("/lagre", enBillett, function (){
             hentAlle();
+        }).fail(function (jqXHR){
+            const json = $.parseJSON(jqXHR.responseText);
+
+            $("#feil").html(json.message);
         });
 
 
@@ -110,18 +116,19 @@ function kjøpBillett(){
     }
 }
 
+// denne gir ut billettene med all informasjon om billetten, legger dette etter validering så alt blir validert før det hentes ut
 function hentAlle(){
-    $.get("/hentAlle", function (data){
-        visBilletter(data);
+    $.get("/hentAlle", function (enFilm){
+        visBilletter(enFilm);
     });
 }
 
-// formatering for å vise billettene med tabell
+// formatering for å vise billettene med tabell, formatert med bootstrap
 function visBilletter(){
     let ut = `<table class="table table-striped"><tr><th>Film</th><th>Antall</th><th>Fornavn</th><th>Etternavn</th><th>Telefonnr</th><th>Epost</th></tr>`;
     for (let b of billetter){
         ut+="<tr>";
-        ut+="<td>"+b.valg+"</td>"+"<td>"+b.antall+"</td>"+"<td>"+b.fornavn+"</td>"+"<td>"+b.etternavn+"</td>"+"<td>"+b.telefonnr+"</td>"+"<td>"+b.epost+"</td>";
+        ut+="<td>"+b.film+"</td>"+"<td>"+b.antall+"</td>"+"<td>"+b.fornavn+"</td>"+"<td>"+b.etternavn+"</td>"+"<td>"+b.telefonnr+"</td>"+"<td>"+b.epost+"</td>";
         ut+="</tr>";
     }
     document.getElementById("visAlle").innerHTML=ut;

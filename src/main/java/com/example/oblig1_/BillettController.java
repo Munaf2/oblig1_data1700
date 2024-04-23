@@ -1,20 +1,25 @@
 package com.example.oblig1_;
 
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class BillettController {
 
-    private final List<Billettene> alleBilletter = new ArrayList<>();
+    @Autowired
+    BillettRepository rep;
+    public final List<Filmvalg> filmer = new ArrayList<>();
 
-    @GetMapping("/hentFilmer")
-    public List<Filmvalg> hentfilmer(){
-        final List<Filmvalg> filmer = new ArrayList<>();
+
+    public BillettController(){
         Filmvalg film1 = new Filmvalg("Barbie");
         filmer.add(film1);
         Filmvalg film2 = new Filmvalg("Rush Hour");
@@ -25,21 +30,30 @@ public class BillettController {
         filmer.add(film4);
         Filmvalg film5 = new Filmvalg("Titanic");
         filmer.add(film5);
+    }
+
+    // henter alle tilgjengelige filmvalg
+    @GetMapping("/hentAlleFilmer")
+    public List<Filmvalg> hentFilmer(){
         return filmer;
     }
 
     @PostMapping("/lagre")
-    public void lagreBilletter(Billettene innBillett){
-        alleBilletter.add(innBillett);
+    public void lagreBilletter(Billettene innBillett, HttpServletResponse response) throws IOException {
+
+        if (!rep.lagreBillett(innBillett)){
+            response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Feil i DB - prøv igjen senere");
+        }
     }
 
     @GetMapping("/hentAlle")
     public List<Billettene> hentAlle(){
-        return alleBilletter;
+        return rep.hentAlleBilletter();
     }
 
     @GetMapping("/slettAlle")
     public void slettAlle(){
-        alleBilletter.clear();
+        rep.slettAlleBilletter();
     }
 }
