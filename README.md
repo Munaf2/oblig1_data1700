@@ -17,4 +17,7 @@ Hver input som skrives inn sjekkes med inputvalidering, dersom dette ikke er rik
 
 Til slutt er det mulig å trykke på en Slett billetter knapp som vil slette alle billettene i arrayet. 
 
+Link til opptak på youtube:
+https://youtu.be/ZrXwEAnndlM
+
 
